@@ -69,12 +69,12 @@ public class TableSnapshotGenerator extends HibernateSnapshotGenerator {
                 PersistentClass pc = tableMappings.next();
 
                 org.hibernate.mapping.Table hTable = pc.getTable();
-               // if (hTable.isPhysicalTable()) {
+                if (hTable.isPhysicalTable()) {
                     Table table = new Table().setName(hTable.getName());
                     table.setSchema(schema);
                     LOG.info("Found table " + table.getName());
                     schema.addDatabaseObject(snapshotObject(table, snapshot));
-                //}
+                }
             }
 
             tableMappings = entityBindings.iterator();
@@ -98,6 +98,19 @@ public class TableSnapshotGenerator extends HibernateSnapshotGenerator {
                             break;
                         }
                     }
+                }
+            }
+
+            Collection<org.hibernate.mapping.Collection> collectionBindings = metadata.getCollectionBindings();
+            Iterator<org.hibernate.mapping.Collection> collIter = collectionBindings.iterator();
+            while (collIter.hasNext()) {
+                org.hibernate.mapping.Collection coll = collIter.next();
+                org.hibernate.mapping.Table hTable = coll.getCollectionTable();
+                if (hTable.isPhysicalTable()) {
+                    Table table = new Table().setName(hTable.getName());
+                    table.setSchema(schema);
+                    LOG.info("Found table " + table.getName());
+                    schema.addDatabaseObject(snapshotObject(table, snapshot));
                 }
             }
         }

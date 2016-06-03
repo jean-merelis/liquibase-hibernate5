@@ -36,7 +36,7 @@ public class HibernateEjb3DatabaseTest {
                 hasProperty("name", is("Bid")),
                 hasProperty("name", is("Watcher")),
                 hasProperty("name", is("User")),
-                hasProperty("name", is("user_phone")), //<<--- this line breaks the test
+                hasProperty("name", is("user_phone")), 
                 hasProperty("name", is("AuctionInfo")),
                 hasProperty("name", is("AuctionItem")),
                 hasProperty("name", is("Item")),
@@ -92,7 +92,7 @@ public class HibernateEjb3DatabaseTest {
                 hasProperty("name", is("bid")),
                 hasProperty("name", is("watcher")),
                 hasProperty("name", is("user")),
-                hasProperty("name", is("user_phone")),  //<<--- this line breaks the test
+                hasProperty("name", is("user_phone")),
                 hasProperty("name", is("auction_info")),
                 hasProperty("name", is("auction_item")),
                 hasProperty("name", is("item")),
