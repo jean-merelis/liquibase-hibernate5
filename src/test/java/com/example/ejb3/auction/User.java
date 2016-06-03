@@ -4,16 +4,21 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 
 @Entity
 public class User extends Persistent {
+
     private String userName;
     private String password;
     private String email;
     private Name name;
     private List<Bid> bids;
     private List<AuctionItem> auctions;
+    private Set<String> phones;
 
     public String getEmail() {
         return email;
@@ -47,6 +52,16 @@ public class User extends Persistent {
     @OneToMany(mappedBy = "bidder", cascade = CascadeType.ALL)
     public List<Bid> getBids() {
         return bids;
+    }
+
+    @ElementCollection
+    @CollectionTable(name = "user_phone")
+    public Set<String> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<String> phones) {
+        this.phones = phones;
     }
 
     public void setAuctions(List<AuctionItem> list) {

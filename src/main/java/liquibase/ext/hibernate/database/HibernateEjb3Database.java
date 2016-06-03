@@ -5,19 +5,15 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
 import liquibase.database.DatabaseConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.ext.hibernate.database.connection.HibernateConnection;
 import org.hibernate.service.ServiceRegistry;
 
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.metamodel.EmbeddableType;
 import javax.persistence.metamodel.ManagedType;
-import javax.persistence.metamodel.Metamodel;
 import javax.persistence.spi.PersistenceUnitTransactionType;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataBuilder;
@@ -29,7 +25,6 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
 import org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder;
 import org.hibernate.jpa.boot.spi.PersistenceUnitDescriptor;
-import org.hibernate.jpa.internal.metamodel.MetamodelImpl;
 
 /**
  * Database implementation for "ejb3" hibernate configurations. This supports
@@ -72,7 +67,7 @@ public class HibernateEjb3Database extends HibernateDatabase {
                 .build();
 
         MetadataSources sources = new MetadataSources(standardRegistry);
-        
+
 
         Iterator<ManagedType<?>> it = emf.getMetamodel().getManagedTypes().iterator();
         while (it.hasNext()) {
