@@ -60,14 +60,12 @@ public class HibernateEjb3Database extends HibernateDatabase {
         EntityManagerFactory emf = builder.build();
         String dialectString = (String) emf.getProperties().get(AvailableSettings.DIALECT);
 
-
         ServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
                 .applySetting(AvailableSettings.DIALECT, configureDialect(dialectString))
                 .applySetting(AvailableSettings.USE_NEW_ID_GENERATOR_MAPPINGS, "true")
                 .build();
 
         MetadataSources sources = new MetadataSources(standardRegistry);
-
 
         Iterator<ManagedType<?>> it = emf.getMetamodel().getManagedTypes().iterator();
         while (it.hasNext()) {
@@ -79,15 +77,14 @@ public class HibernateEjb3Database extends HibernateDatabase {
         }
 
         Package[] packages = Package.getPackages();
-        for (Package p: packages){
-        sources.addPackage(p);
+        for (Package p : packages) {
+            sources.addPackage(p);
         }
 
         MetadataBuilder metadataBuilder = sources.getMetadataBuilder();
         metadataBuilder.enableNewIdentifierGeneratorSupport(true);
         configureImplicitNamingStrategy(metadataBuilder, (String) emf.getProperties().get(AvailableSettings.IMPLICIT_NAMING_STRATEGY));
         configurePhysicalNamingStrategy(metadataBuilder, (String) emf.getProperties().get(AvailableSettings.PHYSICAL_NAMING_STRATEGY));
-
 
         return metadataBuilder.build();
     }

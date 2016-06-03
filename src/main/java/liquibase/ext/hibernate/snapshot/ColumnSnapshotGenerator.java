@@ -159,7 +159,9 @@ public class ColumnSnapshotGenerator extends HibernateSnapshotGenerator {
                                     column.setAutoIncrementInformation(new Column.AutoIncrementInformation());
                                 }
                             } else if ("org.hibernate.id.enhanced.SequenceStyleGenerator".equals(identifierGeneratorStrategy)) {
-                                column.setAutoIncrementInformation(new Column.AutoIncrementInformation());
+                                Properties prop = ((SimpleValue) hibernateColumn.getValue()).getIdentifierGeneratorProperties();
+                                if (prop.get("sequence_name") == null)
+                                   column.setAutoIncrementInformation(new Column.AutoIncrementInformation());
                             }
                         }
                     }
