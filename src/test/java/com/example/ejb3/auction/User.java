@@ -18,7 +18,7 @@ public class User extends Persistent {
     private Name name;
     private List<Bid> bids;
     private List<AuctionItem> auctions;
-    private Set<String> phones;
+    private List<String> phones;
 
     public String getEmail() {
         return email;
@@ -56,11 +56,11 @@ public class User extends Persistent {
 
     @ElementCollection
     @CollectionTable(name = "user_phone")
-    public Set<String> getPhones() {
+    public List<String> getPhones() {
         return phones;
     }
 
-    public void setPhones(Set<String> phones) {
+    public void setPhones(List<String> phones) {
         this.phones = phones;
     }
 

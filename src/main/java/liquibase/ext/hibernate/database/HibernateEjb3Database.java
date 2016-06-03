@@ -57,7 +57,7 @@ public class HibernateEjb3Database extends HibernateDatabase {
         MyHibernatePersistenceProvider persistenceProvider = new MyHibernatePersistenceProvider();
         final EntityManagerFactoryBuilderImpl builder = (EntityManagerFactoryBuilderImpl) persistenceProvider.getEntityManagerFactoryBuilderOrNull(connection.getPath(), null, null);
 
-        EntityManagerFactory emf = builder.build();//Persistence.createEntityManagerFactory(connection.getPath());
+        EntityManagerFactory emf = builder.build();
         String dialectString = (String) emf.getProperties().get(AvailableSettings.DIALECT);
 
 
