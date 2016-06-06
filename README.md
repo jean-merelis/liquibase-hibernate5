@@ -8,3 +8,20 @@ This project is based on official [liquibase-hibernate](https://github.com/liqui
 This project is a lab for liquibase hibernate 5.x integration.
 
 For now only supports ejb3 database.
+
+Configurations
+--------------
+
+The hibernate ejb3 URL allows you to either reference a persistence-unit defined in your persistence.xml or specify a class name that implements liquibase/ext/hibernate/customfactory/CustomEjb3ConfigurationFactory
+
+Supported params:
+	- hibernate.dialect
+	- hibernate.id.new_generator_mappings
+	- hibernate.implicit_naming_strategy
+	- hibernate.physical_naming_strategy
+	
+Examples:
+
+    hibernate:ejb3:myPersistenceUnit
+    hibernate:ejb3:com.example.MyConfigFactory
+    hibernate:ejb3:myPersistenceUnit?hibernate.dialect=org.my.CustomDialect&amp;hibernate.id.new_generator_mappings=true&amp;hibernate.implicit_naming_strategy=com.mycompany.CustomImplicitNamingStrategy
