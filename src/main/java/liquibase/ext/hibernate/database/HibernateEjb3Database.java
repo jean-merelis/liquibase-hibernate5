@@ -62,7 +62,6 @@ public class HibernateEjb3Database extends HibernateDatabase {
 
         ServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
                 .applySetting(AvailableSettings.DIALECT, configureDialect(dialectString))
-                .applySetting(AvailableSettings.USE_NEW_ID_GENERATOR_MAPPINGS, "true")
                 .build();
 
         MetadataSources sources = new MetadataSources(standardRegistry);
@@ -83,6 +82,7 @@ public class HibernateEjb3Database extends HibernateDatabase {
 
         MetadataBuilder metadataBuilder = sources.getMetadataBuilder();
         metadataBuilder.enableNewIdentifierGeneratorSupport(true);
+        configureNewIdentifierGeneratorSupport(metadataBuilder, (String) emf.getProperties().get(AvailableSettings.USE_NEW_ID_GENERATOR_MAPPINGS));
         configureImplicitNamingStrategy(metadataBuilder, (String) emf.getProperties().get(AvailableSettings.IMPLICIT_NAMING_STRATEGY));
         configurePhysicalNamingStrategy(metadataBuilder, (String) emf.getProperties().get(AvailableSettings.PHYSICAL_NAMING_STRATEGY));
 

@@ -80,6 +80,19 @@ public abstract class HibernateDatabase extends AbstractJdbcDatabase {
 
 
 
+    protected void configureNewIdentifierGeneratorSupport(MetadataBuilder builder, String value) throws DatabaseException {
+        String _value;
+        _value = ((HibernateConnection) ((JdbcConnection) getConnection()).getUnderlyingConnection()).getProperties().getProperty(AvailableSettings.USE_NEW_ID_GENERATOR_MAPPINGS, value);
+
+        try {
+            if (_value != null) {
+                builder.enableNewIdentifierGeneratorSupport(Boolean.valueOf(_value));
+            }
+        } catch (Exception e) {
+            throw new DatabaseException(e);
+        }
+    }
+
     protected void configurePhysicalNamingStrategy(MetadataBuilder builder, String physicalNamingStrategy) throws DatabaseException {
         String namingStrategy;
         namingStrategy = ((HibernateConnection) ((JdbcConnection) getConnection()).getUnderlyingConnection()).getProperties().getProperty(AvailableSettings.PHYSICAL_NAMING_STRATEGY, physicalNamingStrategy);

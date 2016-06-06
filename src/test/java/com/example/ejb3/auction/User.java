@@ -4,12 +4,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 @Entity
+@Table(indexes = @Index(columnList = "email"))
 public class User extends Persistent {
 
     private String userName;
