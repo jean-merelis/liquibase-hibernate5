@@ -1,5 +1,25 @@
 package liquibase.ext.hibernate.database.connection;
 
+/*
+ * #%L
+ * Liquibase Hibernate 5 Integration
+ * %%
+ * Copyright (C) 2016 Liquibase.org
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URLDecoder;
@@ -39,7 +59,7 @@ public class HibernateConnection implements Connection {
         }
     }
 
-    /**
+    /*
      * Creates properties to attach to this connection based on the passed query string.
      */
     protected Properties readProperties(String queryString) {
@@ -55,7 +75,7 @@ public class HibernateConnection implements Connection {
         return properties;
     }
 
-    /**
+    /*
      * Returns the entire connection URL
      */
     public String getUrl() {
@@ -63,21 +83,21 @@ public class HibernateConnection implements Connection {
     }
 
 
-    /**
+    /*
      * Returns the 'protocol' of the URL. For example, "hibernate:classic" or "hibernate:ejb3"
      */
     public String getPrefix() {
         return prefix;
     }
 
-    /**
+    /*
      * The portion of the url between the path and the query string. Normally a filename or a class name.
      */
     public String getPath() {
         return path;
     }
 
-    /**
+    /*
      * The set of properties provided by the URL. Eg:
      * <p/>
      * <code>hibernate:classic:/path/to/hibernate.cfg.xml?foo=bar</code>

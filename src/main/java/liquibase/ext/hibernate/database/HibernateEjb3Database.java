@@ -1,5 +1,25 @@
 package liquibase.ext.hibernate.database;
 
+/*
+ * #%L
+ * Liquibase Hibernate 5 Integration
+ * %%
+ * Copyright (C) 2016 Liquibase.org
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.lang.reflect.Field;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -48,7 +68,7 @@ public class HibernateEjb3Database extends HibernateDatabase {
         }
     }
 
-    /**
+    /*
      * Build a Configuration object assuming the connection path is a hibernate
      * XML configuration file.
      */
@@ -89,7 +109,7 @@ public class HibernateEjb3Database extends HibernateDatabase {
         return metadataBuilder.build();
     }
 
-    /**
+    /*
      * Build a Configuration object assuming the connection path is a
      * {@link CustomEjb3MetadataFactory} class name
      */
@@ -105,7 +125,7 @@ public class HibernateEjb3Database extends HibernateDatabase {
         }
     }
 
-    /**
+    /*
      * Return true if the given path is a {@link CustomEjb3MetadataFactory}
      */
     protected boolean isCustomFactoryClass(String path) {

@@ -26,3 +26,14 @@ Examples:
     hibernate:ejb3:myPersistenceUnit
     hibernate:ejb3:com.example.MyConfigFactory
     hibernate:ejb3:myPersistenceUnit?hibernate.dialect=org.my.CustomDialect&amp;hibernate.id.new_generator_mappings=true&amp;hibernate.implicit_naming_strategy=com.mycompany.CustomImplicitNamingStrategy
+	
+
+Download:
+
+```xml
+<dependency>
+    <groupId>com.github.jean-merelis</groupId>
+    <artifactId>liquibase-hibernate5</artifactId>
+    <version>1.0.0.Beta</version>
+</dependency>
+```
