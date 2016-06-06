@@ -15,10 +15,11 @@ Configurations
 The hibernate ejb3 URL allows you to either reference a persistence-unit defined in your persistence.xml or specify a class name that implements liquibase/ext/hibernate/customfactory/CustomEjb3ConfigurationFactory
 
 Supported params:
-	- hibernate.dialect
-	- hibernate.id.new_generator_mappings
-	- hibernate.implicit_naming_strategy
-	- hibernate.physical_naming_strategy
+	
+    hibernate.dialect
+    hibernate.id.new_generator_mappings
+    hibernate.implicit_naming_strategy
+    hibernate.physical_naming_strategy
 	
 Examples:
 
