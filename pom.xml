@@ -10,7 +10,7 @@
 
     <groupId>com.github.jean-merelis</groupId>
     <artifactId>liquibase-hibernate5</artifactId>
-    <version>1.0.0.Beta</version>
+    <version>1.0.0-beta.1</version>
 
     <name>Liquibase Hibernate 5 Integration</name>
     <description>Liquibase extension for hibernate 5 integration including generating changesets based on changed

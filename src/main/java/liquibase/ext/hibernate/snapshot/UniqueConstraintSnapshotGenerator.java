@@ -19,7 +19,9 @@ package liquibase.ext.hibernate.snapshot;
  * limitations under the License.
  * #L%
  */
-
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import liquibase.exception.DatabaseException;
 import liquibase.snapshot.DatabaseSnapshot;
 import liquibase.snapshot.InvalidExampleException;
@@ -30,6 +32,7 @@ import liquibase.structure.core.Table;
 import liquibase.structure.core.UniqueConstraint;
 
 import java.util.Iterator;
+import org.hibernate.HibernateException;
 
 public class UniqueConstraintSnapshotGenerator extends HibernateSnapshotGenerator {
 
@@ -80,10 +83,11 @@ public class UniqueConstraintSnapshotGenerator extends HibernateSnapshotGenerato
                 if (column.isUnique()) {
                     UniqueConstraint uniqueConstraint = new UniqueConstraint();
                     uniqueConstraint.setTable(table);
-                    String name = "UC_" + table.getName().toUpperCase() + column.getName().toUpperCase() + "_COL";
-                    if (name.length() > 64) {
-                        name = name.substring(0, 63);
-                    }
+                    String name =  table.getName().toUpperCase() + column.getName().toUpperCase();
+                    name = "UCCOL" + hashedName(name);
+//                    if (name.length() > 64) {
+//                        name = name.substring(0, 63);
+//                    }
                     uniqueConstraint.addColumn(0, new Column(column.getName()).setRelation(table));
                     uniqueConstraint.setName(name);
                     LOG.info("Found unique constraint " + uniqueConstraint.toString());
@@ -94,6 +98,32 @@ public class UniqueConstraintSnapshotGenerator extends HibernateSnapshotGenerato
 
                 }
             }
+
+            Iterator<UniqueConstraint> ucIter = table.getUniqueConstraints().iterator();
+            while (ucIter.hasNext()) {
+                UniqueConstraint uc = ucIter.next();
+                if (uc.getName() == null || uc.getName().isEmpty()) {
+                    String name =  table.getName() + uc.getColumnNames();
+                    name = "UCIDX" + hashedName(name);
+                    uc.setName(name);
+                }
+            }
+        }
+    }
+
+    private String hashedName(String s) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.reset();
+            md.update(s.getBytes());
+            byte[] digest = md.digest();
+            BigInteger bigInt = new BigInteger(1, digest);
+            // By converting to base 35 (full alphanumeric), we guarantee
+            // that the length of the name will always be smaller than the 30
+            // character identifier restriction enforced by a few dialects.
+            return bigInt.toString(35);
+        } catch (NoSuchAlgorithmException e) {
+            throw new HibernateException("Unable to generate a hashed name!", e);
         }
     }
 

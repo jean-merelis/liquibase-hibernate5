@@ -19,7 +19,6 @@ package liquibase.ext.hibernate.snapshot;
  * limitations under the License.
  * #L%
  */
-
 import liquibase.exception.DatabaseException;
 import liquibase.snapshot.DatabaseSnapshot;
 import liquibase.snapshot.InvalidExampleException;
@@ -27,6 +26,7 @@ import liquibase.structure.DatabaseObject;
 import liquibase.structure.core.*;
 
 import java.util.Iterator;
+import org.hibernate.mapping.UniqueKey;
 
 public class IndexSnapshotGenerator extends HibernateSnapshotGenerator {
 
@@ -50,6 +50,10 @@ public class IndexSnapshotGenerator extends HibernateSnapshotGenerator {
             Index index = new Index();
             index.setTable(table);
             index.setName(hibernateIndex.getName());
+
+            //TODO:
+            index.setUnique(false);
+
             Iterator columnIterator = hibernateIndex.getColumnIterator();
             while (columnIterator.hasNext()) {
                 org.hibernate.mapping.Column hibernateColumn = (org.hibernate.mapping.Column) columnIterator.next();
@@ -83,6 +87,10 @@ public class IndexSnapshotGenerator extends HibernateSnapshotGenerator {
                 Index index = new Index();
                 index.setTable(table);
                 index.setName(hibernateIndex.getName());
+
+                //TODO:
+                index.setUnique(false);
+
                 Iterator columnIterator = hibernateIndex.getColumnIterator();
                 while (columnIterator.hasNext()) {
                     org.hibernate.mapping.Column hibernateColumn = (org.hibernate.mapping.Column) columnIterator.next();
