@@ -1,3 +1,8 @@
+# Deprecated
+
+This project no longer receives maintenance.
+Please use the official Liquibase library -> https://github.com/liquibase/liquibase-hibernate
+
 # Liquibase Hibernate 5 Integration
 
 This extension lets you use your Hibernate 5 configuration as a comparison database for diff, diffChangeLog and generateChangeLog in Liquibase.
